@@ -6,13 +6,20 @@ public class Quick{
   //should make better by not randomizing the number
  */
  public static int quickselect(int []data, int k){
-   int a = partition(data, 0, data.length - 1);
-   if(a == k - 1){
-     return data[a];
+   int end = data.length - 1;
+   return qsh(data, k, 0, end);
+ }
+
+ public static int qsh(int[] data, int k, int start, int end){
+   int a = partition(data, start, end);
+   System.out.println(a);
+   if(a > k - 1){
+     return qsh(data, k, start, a);
    }
-   else{
-     return quickselect(data, k);
+   if(a < k - 1){
+     return qsh(data, k, a, end);
    }
+   return data[a];
  }
 
  public static int partition(int[] data, int start, int end){
@@ -61,11 +68,11 @@ public class Quick{
    int[] nah = new int[]{
      1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0
    };
+   //System.out.println(Arrays.toString(nah));
+   //System.out.println(partition(nah, 0, nah.length - 1));
+   //System.out.println(Arrays.toString(nah));
    System.out.println(Arrays.toString(nah));
-   System.out.println(partition(nah, 0, nah.length - 1));
+   System.out.println(quickselect(nah, 5));
    System.out.println(Arrays.toString(nah));
-
-   //System.out.println(quickselect(yea, 10));
-   //System.out.println(Arrays.toString(yea));
  }
 }
