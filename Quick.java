@@ -3,9 +3,10 @@ import java.util.Arrays;
 
 public class Quick{
   /*return the value that is the kth smallest value of the array.
+  //should make better by not randomizing the number
  */
  public static int quickselect(int []data, int k){
-   int a = partition(data, 0, data.length);
+   int a = partition(data, 0, data.length - 1);
    if(a == k - 1){
      return data[a];
    }
@@ -15,7 +16,6 @@ public class Quick{
  }
 
  public static int partition(int[] data, int start, int end){
-   end--;
    Random rng = new Random();
    int index = Math.abs(rng.nextInt(end - start)) + start;
    int pivot = data[index];
@@ -47,6 +47,7 @@ public class Quick{
        b = i;
      }
    }
+   //System.out.println(pivot);
    return b;
  }
 
@@ -55,8 +56,16 @@ public class Quick{
 
  public static void main(String[] args){
    int[] yea = new int[]{
-     4, 3, 5, 6, 9, 10, 34, 8, 7, 20 , 23, 13, 45, 40, 80
+     4, 3, 5, 6, 9, 10, 34, 8, 7, 20 , 23, 13, 45, 40, 2
    };
-   System.out.println(quickselect(yea, 2));
+   int[] nah = new int[]{
+     1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0
+   };
+   System.out.println(Arrays.toString(nah));
+   System.out.println(partition(nah, 0, nah.length - 1));
+   System.out.println(Arrays.toString(nah));
+
+   //System.out.println(quickselect(yea, 10));
+   //System.out.println(Arrays.toString(yea));
  }
 }
