@@ -44,7 +44,8 @@ public class Quick{
  ///finish optimization1 and optimization2 by thursday
 
  public static int partition(int[] data, int start, int end){
-   int middle = (start + end ) / 2;
+   Random rng = new Random();
+   int middle = (start + end) / 2;
    int index = middle;
    if(data[start] > data[end] && data[start] < data[middle]
    || data[start] < data[end] && data[start] > data[middle]){
@@ -61,7 +62,8 @@ public class Quick{
    index = start;
    start++;
    while (start != end) {
-     if (data[start] >= pivot){
+     if (data[start] > pivot
+     || (data[start] == pivot && Math.random() > 0.50)){
        int temp2 = data[start];
        data[start] = data[end];
        data[end] = temp2;
