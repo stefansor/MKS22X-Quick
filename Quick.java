@@ -10,14 +10,14 @@ public class Quick{
    qsorth(data, 0, data.length - 1);
  }
 
-public static void qsorth(int[] data, int lo, int hi){
+ public static void qsorth(int[] data, int lo, int hi){
   if(lo >= hi){
     return;
   }
   int pivot = partition(data, lo, hi);
   qsorth(data, lo, pivot - 1);
   qsorth(data, pivot + 1, hi);
-}
+ }
 
 
 
@@ -44,8 +44,16 @@ public static void qsorth(int[] data, int lo, int hi){
  ///finish optimization1 and optimization2 by thursday
 
  public static int partition(int[] data, int start, int end){
-   Random rng = new Random();
-   int index = Math.abs(rng.nextInt(end - start)) + start;
+   int middle = (start + end ) / 2;
+   int index = middle;
+   if(data[start] > data[end] && data[start] < data[middle]
+   || data[start] < data[end] && data[start] > data[middle]){
+     index = start;
+   }
+   if(data[end] > data[start] && data[end] < data[middle]
+   || data[end] < data[start] && data[end] > data[middle]){
+     index = end;
+   }
    int pivot = data[index];
    int temp = data[start];
    data[start] = pivot;
@@ -83,6 +91,7 @@ public static void qsorth(int[] data, int lo, int hi){
 
 
  public static void main(String[] args){
+   System.out.println(199999 + 199999 / 2);
    Random rng = new Random();
    int[] yea = new int[200000];
    int[] yea2 = new int[200000];
