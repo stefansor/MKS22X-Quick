@@ -39,6 +39,10 @@ public static void qsorth(int[] data, int lo, int hi){
    return data[a];
  }
 
+ ///optimization1 pivot become median of the three values: hi lo and middle
+ ///optimization2 duplicates have 50% to go to either side
+ ///finish optimization1 and optimization2 by thursday
+
  public static int partition(int[] data, int start, int end){
    Random rng = new Random();
    int index = Math.abs(rng.nextInt(end - start)) + start;
