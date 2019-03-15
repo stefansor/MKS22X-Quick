@@ -44,7 +44,6 @@ public class Quick{
  ///finish optimization1 and optimization2 by thursday
 
  public static int partition(int[] data, int start, int end){
-   Random rng = new Random();
    int middle = (start + end) / 2;
    int index = middle;
    if(data[start] > data[end] && data[start] < data[middle]
@@ -88,25 +87,101 @@ public class Quick{
    //System.out.println(pivot);
    return b;
  }
-
-
-
-
- public static void main(String[] args){
-   System.out.println(199999 + 199999 / 2);
-   Random rng = new Random();
-   int[] yea = new int[200000];
-   int[] yea2 = new int[200000];
-   for(int i = 0; i < yea.length; i++){
-     int a = rng.nextInt();
-     yea[i] = a;
-     yea2[i] = a;
+ public static int[] partitionDutch(int[] data, int lo, int hi){
+   int middle = (lo + hi) / 2;
+   int index = middle;
+   if(data[lo] > data[hi] && data[lo] < data[middle]
+   || data[lo] < data[hi] && data[lo] > data[middle]){
+     index = lo;
    }
-   quicksort(yea);
-   Arrays.sort(yea2);
-   if(Arrays.equals(yea, yea2)){
-     System.out.println("true");
+   if(data[hi] > data[lo] && data[hi] < data[middle]
+   || data[hi] < data[lo] && data[hi] > data[middle]){
+     index = hi;
    }
-   System.out.println("false");
+   int lt = lo;
+   int gt = hi;
+   int i = lt;
+   int pivot = data[index];
+   int temp = data[lo];
+   data[lt] = pivot;
+   data[index] = temp;
+   index = lt;
+   lt++;
+   while (i <= gt) {
+     if (data[i] > pivot){
+       //switches gt value with lt value
+       int temp1 = data[i];
+       data[i] = data[gt];
+       data[gt] = temp1;
+       gt--;
+     }
+     else if(data[i] == pivot){
+       //increments i
+       i++;
+     }
+     else{
+       int temp2 = data[i];
+       data[i] = data[lt];
+       data[lt] = temp2;
+       lt++;
+       i++;
+     }
+   }
+   lt--;
+   //swaps pivot with gt
+   int temp3 = data[index];
+   data[index] = data[lt];
+   data[lt] = temp3;
+   int[] yep = new int[]{
+     lt, gt
+   };
+   System.out.println(pivot);
+   return yep;
  }
+
+
+
+ public static void main(String[]args){
+  /*System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+  int[]MAX_LIST = {1000000000,500,10};
+  for(int MAX : MAX_LIST){
+    for(int size = 31250; size < 2000001; size*=2){
+      long qtime=0;
+      long btime=0;
+      //average of 5 sorts.
+      for(int trial = 0 ; trial <=5; trial++){
+        int []data1 = new int[size];
+        int []data2 = new int[size];
+        for(int i = 0; i < data1.length; i++){
+          data1[i] = (int)(Math.random()*MAX);
+          data2[i] = data1[i];
+        }
+        long t1,t2;
+        t1 = System.currentTimeMillis();
+        Quick.quicksort(data2);
+        t2 = System.currentTimeMillis();
+        qtime += t2 - t1;
+        t1 = System.currentTimeMillis();
+        Arrays.sort(data1);
+        t2 = System.currentTimeMillis();
+        btime+= t2 - t1;
+        if(!Arrays.equals(data1,data2)){
+          System.out.println("FAIL TO SORT!");
+          System.exit(0);
+        }
+      }
+      System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
+    }
+    System.out.println();
+  }*/
+
+  int[] yea = new int[]{
+    3,3,4,5,6,4,6,8,5,2,4,6,8,3,4,6,98,64,35,76,3,45,65,7
+  };
+  System.out.println(Arrays.toString(yea));
+  System.out.println(Arrays.toString(partitionDutch(yea, 0, yea.length - 1)));
+  System.out.println(Arrays.toString(yea));
+}
+
+
 }
