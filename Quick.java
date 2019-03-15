@@ -14,9 +14,9 @@ public class Quick{
   if(lo >= hi){
     return;
   }
-  int pivot = partition(data, lo, hi);
-  qsorth(data, lo, pivot - 1);
-  qsorth(data, pivot + 1, hi);
+  int pivot[] = partitionDutch(data, lo, hi);
+  qsorth(data, lo, pivot[0] -1);
+  qsorth(data, pivot[1] + 1, hi);
  }
 
 
@@ -28,15 +28,15 @@ public class Quick{
  }
 
  public static int qsh(int[] data, int k, int start, int end){
-   int a = partition(data, start, end);
-   System.out.println(a);
-   if(a > k - 1){
-     return qsh(data, k, start, a);
+   int[] a = partitionDutch(data, start, end);
+   if(k - 1 <= a[1] && k - 1 >= a[0]){
+     return data[a[1]];
    }
-   if(a < k - 1){
-     return qsh(data, k, a, end);
+
+   if(a[0] > k - 1){
+     return qsh(data, k, start, a[0]);
    }
-   return data[a];
+   return qsh(data, k, a[1], end);
  }
 
  ///optimization1 pivot become median of the three values: hi lo and middle
@@ -135,14 +135,13 @@ public class Quick{
    int[] yep = new int[]{
      lt, gt
    };
-   System.out.println(pivot);
    return yep;
  }
 
 
 
  public static void main(String[]args){
-  /*System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+  System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
     for(int size = 31250; size < 2000001; size*=2){
@@ -173,14 +172,8 @@ public class Quick{
       System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
     }
     System.out.println();
-  }*/
+  }
 
-  int[] yea = new int[]{
-    3,3,4,5,6,4,6,8,5,2,4,6,8,3,4,6,98,64,35,76,3,45,65,7
-  };
-  System.out.println(Arrays.toString(yea));
-  System.out.println(Arrays.toString(partitionDutch(yea, 0, yea.length - 1)));
-  System.out.println(Arrays.toString(yea));
 }
 
 
