@@ -32,12 +32,28 @@ public class Quick{
    if(k - 1 <= a[1] && k - 1 >= a[0]){
      return data[a[1]];
    }
+   if(end - start < 5){
+     insertionsort(data, start, end);
+     return data[k - 1];
+   }
 
    if(a[0] > k - 1){
      return qsh(data, k, start, a[0]);
    }
    return qsh(data, k, a[1], end);
  }
+
+ public static void insertionsort(int [] ary, int lo, int hi) {
+		for (int i = lo + 1; i <= hi; i++) {
+			for (int j = i; j > lo; j--) {
+				if (ary[j] < ary[j - 1]) {
+					int old = ary[j];
+					ary[j] = ary[j - 1];
+					ary[j - 1] = old;
+		  	}
+			}
+		}
+	}
 
  ///optimization1 pivot become median of the three values: hi lo and middle
  ///optimization2 duplicates have 50% to go to either side
