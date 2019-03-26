@@ -29,15 +29,15 @@ public class Quick{
 
  public static int qsh(int[] data, int k, int start, int end){
    int[] a = partitionDutch(data, start, end);
-   if(k - 1 <= a[1] && k - 1 >= a[0]){
+   if(k <= a[1] && k >= a[0]){
      return data[a[1]];
    }
    if(end - start < 5){
      insertionsort(data, start, end);
-     return data[k - 1];
+     return data[k];
    }
 
-   if(a[0] > k - 1){
+   if(a[0] > k){
      return qsh(data, k, start, a[0]);
    }
    return qsh(data, k, a[1], end);
@@ -157,7 +157,7 @@ public class Quick{
 
 
  public static void main(String[]args){
-  System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+  /*System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
     for(int size = 31250; size < 2000001; size*=2){
@@ -189,7 +189,12 @@ public class Quick{
     }
     System.out.println();
   }
-
+*/
+   int[] yea = new int[]{
+     3,5,4,3,2,5,6,4,3,2,4,53,4,2,3,3,2,2
+   };
+   System.out.println(quickselect(yea, 3));
+   System.out.println(Arrays.toString(yea));
 }
 
 
